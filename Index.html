@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>GSI UPLA | Gerencia de Sistemas de Información</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- jsPDF para generar PDFs reales -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <!-- ==================== MODALES ==================== -->
+  <div id="videoModal" class="modal">
+    <div class="modal-content modal-video">
+      <span class="modal-close">&times;</span>
+      <div id="videoModalBody">
+        <iframe id="videoIframe" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div id="readingModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close-reading">&times;</span>
+      <div id="readingModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ==================== TOGGLE MODO OSCURO ==================== -->
+  <div class="theme-toggle-wrapper">
+    <button id="themeToggle" class="theme-toggle">
+      <i class="fa-regular fa-sun"></i>
+      <i class="fa-regular fa-moon"></i>
+    </button>
+  </div>
+
+  <!-- ==================== PARTICULAS FLOTANTES ==================== -->
+  <div class="particles" id="particles"></div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header id="inicio">
+    <div class="header-overlay"></div>
+    <div class="header-bg-pattern"></div>
+    <div class="container header-container">
+      <div class="badge-glow">
+        <i class="fa-solid fa-university"></i> Universidad Peruana Los Andes · Ingeniería de Sistemas
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line">Gerencia de Sistemas</span>
+        <span class="title-line accent">de Información</span>
+      </h1>
+      <div class="hero-meta">
+        <span><i class="fa-solid fa-code"></i> Código: 332159</span>
+        <span><i class="fa-regular fa-calendar"></i> Ciclo VII · 2026-I</span>
+        <span><i class="fa-solid fa-chalkboard-user"></i> Dr. Magno Teofilo Baldeon Tovar</span>
+        <span><i class="fa-regular fa-star"></i> 3 Créditos · 4h/semana</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#semanas" class="btn-primary"><i class="fa-solid fa-arrow-down"></i> Explorar contenido</a>
+        <a href="#calendario" class="btn-outline-light"><i class="fa-regular fa-calendar"></i> Calendario</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Desplazar</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </header>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#inicio" class="nav-logo">
+        <i class="fa-solid fa-database"></i> GSI <span>UPLA</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#inicio" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        <li><a href="#info" class="nav-link"><i class="fa-solid fa-circle-info"></i> Curso</a></li>
+        <li><a href="#semanas" class="nav-link"><i class="fa-solid fa-book-open"></i> Semanas</a></li>
+        <li><a href="#calendario" class="nav-link"><i class="fa-regular fa-calendar"></i> Calendario</a></li>
+        <li><a href="#progreso" class="nav-link"><i class="fa-solid fa-chart-line"></i> Progreso</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ==================== SECCIÓN INFORMACIÓN ==================== -->
+    <section id="info" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Presentación</span>
+          <h2>Estructura del Curso</h2>
+          <p>Formando líderes en la gestión estratégica de tecnología e información</p>
+        </div>
+        <div class="info-grid reveal">
+          <div class="info-card">
+            <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <h3>Propósito del Curso</h3>
+            <p>El curso busca desarrollar competencias para <strong>gobernar y gestionar eficazmente las Tecnologías de la Información (TI)</strong> dentro de las organizaciones, alineando la tecnología con los objetivos estratégicos del negocio.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+            <h3>Competencia General</h3>
+            <p>Al finalizar el curso, el estudiante será capaz de <strong>diseñar, implementar y auditar sistemas de información</strong> utilizando TIC, promoviendo la sostenibilidad y la innovación tecnológica.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon"><i class="fa-solid fa-crown"></i></div>
+            <h3>Capacidades Clave</h3>
+            <ul>
+              <li><strong>Administración en la nube:</strong> Gestionar recursos en AWS, Azure y GCP.</li>
+              <li><strong>Infraestructura TI:</strong> Diseñar arquitecturas de hardware y redes.</li>
+              <li><strong>Aplicaciones empresariales:</strong> Implementar sistemas ERP, CRM y SCM.</li>
+              <li><strong>Gobernanza de datos:</strong> Aplicar principios de seguridad e inteligencia de negocios.</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <div class="card-icon"><i class="fa-solid fa-chart-simple"></i></div>
+            <h3>Sistema de Evaluación</h3>
+            <p>Evaluación <strong>continua, formativa e integral</strong>. Promedio mínimo: <strong>10.5</strong>.<br>
+            • Parcial (20%) • Final (20%) • Trabajo Grupal (30%) • Prácticas (30%)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SEMANAS CON PDF DESCARGABLE ==================== -->
+    <section id="semanas" class="section section-alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag"><i class="fa-regular fa-calendar-alt"></i> Plan de estudios</span>
+          <h2>Semanas Académicas</h2>
+          <p>Unidad I: Fundamentos de Administración en la Nube e Infraestructura TI (Semanas 1-5)</p>
+        </div>
+
+        <!-- SEMANA 1 -->
+        <div class="week-card reveal" data-week="1">
+          <div class="week-header">
+            <div class="week-number">01</div>
+            <div class="week-info">
+              <span class="week-unit">UNIDAD I</span>
+              <h3>La Información en la Empresa</h3>
+            </div>
+            <div class="week-actions">
+              <button class="btn-pdf" data-week="1" data-title="Semana 1 - La Información en la Empresa">
+                <i class="fa-regular fa-file-pdf"></i> PDF
+              </button>
+              <div class="week-progress-badge">
+                <span class="progress-check"><i class="fa-regular fa-square"></i></span>
+                <span class="progress-percent">0%</span>
+              </div>
+            </div>
+          </div>
+          <div class="week-body">
+            <div class="week-content">
+              <div class="learning-goal"><i class="fa-regular fa-flag-checkered"></i> <strong>Objetivo:</strong> Comprender el rol estratégico de la información y los sistemas de información en las organizaciones modernas.</div>
+              <div class="topics">
+  <h4><i class="fa-solid fa-list-check"></i> Temas desarrollados</h4>
+  <ul>
+    <li><i class="fa-solid fa-database"></i> <strong>La información como recurso estratégico:</strong> Diferencia entre dato, información y conocimiento. El dato es un hecho bruto sin procesar (ejemplo: "25", "Lima"). La información es el dato con contexto y significado (ejemplo: "La temperatura en Lima es 25°C"). El conocimiento es la capacidad de actuar basada en la información (ejemplo: "Si hace 25°C, usar ropa ligera"). Empresas como Netflix, Amazon y Spotify han logrado ventajas competitivas gracias a la gestión inteligente de la información de sus usuarios.</li>
+
+    <li><i class="fa-solid fa-diagram-project"></i> <strong>Componentes de los Sistemas de Información (SI):</strong> Hardware (servidores, computadoras, dispositivos móviles, equipos de red), software (sistemas operativos, aplicaciones empresariales, bases de datos), datos (maestros como clientes y productos, transaccionales como ventas y pagos), personas (usuarios finales, administradores, desarrolladores, analistas de datos) y procesos (reglas de negocio, procedimientos, flujos de trabajo). Estos cinco elementos trabajan en conjunto para gestionar la información empresarial de forma eficiente.</li>
+
+    <li><i class="fa-solid fa-chart-line"></i> <strong>Tipos de Sistemas de Información:</strong> TPS (Sistemas de Procesamiento de Transacciones) para el nivel operativo que registra ventas y pagos. MIS (Sistemas de Información Gerencial) para el nivel táctico que genera reportes resumidos. DSS (Sistemas de Soporte a Decisiones) para apoyar decisiones no estructuradas con modelos analíticos. EIS (Sistemas de Información Ejecutiva) para la alta dirección con dashboards de KPIs. KMS (Sistemas de Gestión del Conocimiento) para almacenar y compartir mejores prácticas y conocimiento organizacional.</li>
+
+    <li><i class="fa-solid fa-puzzle-piece"></i> <strong>Arquitectura empresarial:</strong> Frameworks como TOGAF (The Open Group Architecture Framework) que permite diseñar, planificar e implementar la arquitectura empresarial incluyendo negocio, datos, aplicaciones y tecnología. Zachman Framework que clasifica los artefactos de arquitectura según perspectivas e interrogantes. Gobierno de TI con COBIT (Control Objectives for Information and Related Technologies) que alinea los objetivos de TI con los objetivos del negocio mediante dominios como alinear-planificar, construir-adquirir, entregar-servir y monitorear-evaluar.</li>
+  </ul>
+</div>
+            </div>
+            <div class="week-visual">
+              <div class="diagram-container">
+                <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="20" y="20" width="260" height="180" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+                  <text x="150" y="45" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">Pirámide Organizacional SI</text>
+                  <polygon points="150,60 200,100 100,100" fill="#3b82f6" opacity="0.85"/>
+                  <text x="150" y="87" text-anchor="middle" font-size="8" fill="white" font-weight="600">EIS / KMS</text>
+                  <polygon points="150,88 210,120 90,120" fill="#6366f1" opacity="0.85"/>
+                  <text x="150" y="115" text-anchor="middle" font-size="8" fill="white" font-weight="600">DSS</text>
+                  <polygon points="150,118 220,150 80,150" fill="#8b5cf6" opacity="0.85"/>
+                  <text x="150" y="143" text-anchor="middle" font-size="8" fill="white" font-weight="600">MIS</text>
+                  <polygon points="150,148 240,180 60,180" fill="#a78bfa" opacity="0.85"/>
+                  <text x="150" y="171" text-anchor="middle" font-size="8" fill="white" font-weight="600">TPS</text>
+                </svg>
+              </div>
+              <div class="video-thumbnail-container" data-video-id="NLvcamk5yiM" data-video-title="Sistemas de Información">
+                <div class="video-thumbnail">
+                  <img src="https://img.youtube.com/vi/NLvcamk5yiM/maxresdefault.jpg" alt="Video Semana 1" onerror="this.src='https://img.youtube.com/vi/NLvcamk5yiM/hqdefault.jpg'">
+                  <div class="play-overlay">
+                    <i class="fa-regular fa-circle-play"></i>
+                  </div>
+                </div>
+                <p class="video-caption"><i class="fa-brands fa-youtube"></i> Click para ver el video</p>
+              </div>
+              <button class="btn-reading" data-title="Semana 1: Lectura Complementaria" data-content="<strong>Capítulo 1 - 'Sistemas de Información Gerencial' (Laudon & Laudon)</strong><br><br>Introducción a los sistemas de información en la era digital. Casos de estudio: Walmart y Amazon.<br><br><strong>Preguntas de reflexión:</strong><br>1. ¿Cómo ha transformado la información nuestra forma de trabajar?<br>2. ¿Qué diferencias hay entre TPS y DSS?">📖 Lectura complementaria</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEMANA 2 -->
+        <div class="week-card reveal" data-week="2">
+          <div class="week-header">
+            <div class="week-number">02</div>
+            <div class="week-info">
+              <span class="week-unit">UNIDAD I</span>
+              <h3>Computación en la Nube</h3>
+            </div>
+            <div class="week-actions">
+              <button class="btn-pdf" data-week="2" data-title="Semana 2 - Computación en la Nube">
+                <i class="fa-regular fa-file-pdf"></i> PDF
+              </button>
+              <div class="week-progress-badge"><span class="progress-check"><i class="fa-regular fa-square"></i></span><span class="progress-percent">0%</span></div>
+            </div>
+          </div>
+          <div class="week-body">
+            <div class="week-content">
+              <div class="learning-goal"><i class="fa-regular fa-flag-checkered"></i> <strong>Objetivo:</strong> Diferenciar los modelos de servicio y despliegue en cloud computing.</div>
+              <div class="topics">
+  <h4><i class="fa-solid fa-list-check"></i> Temas desarrollados</h4>
+  <ul>
+    <li><i class="fa-solid fa-cloud"></i> <strong>Definición y características esenciales (NIST):</strong> Autoservicio bajo demanda que permite al usuario aprovisionar recursos sin intervención humana. Acceso amplio a la red disponible desde cualquier dispositivo con internet. Agrupación de recursos donde múltiples clientes comparten infraestructura de forma aislada. Elasticidad rápida que permite el escalado automático según la demanda. Servicio medido con modelo de pago por uso, pagando solo por lo que se consume.</li>
+
+    <li><i class="fa-solid fa-diagram-project"></i> <strong>Modelos de despliegue:</strong> Nube pública donde los recursos son gestionados por terceros como AWS, Azure o Google Cloud Platform. Nube privada con infraestructura dedicada a una organización, generalmente on-premise. Nube híbrida que combina la nube pública y privada para cargas críticas o datos sensibles. Nube comunitaria compartida entre varias organizaciones con intereses comunes, como entidades bancarias o gubernamentales.</li>
+
+    <li><i class="fa-solid fa-cubes"></i> <strong>Modelos de servicio (SPI):</strong> IaaS (Infraestructura como Servicio) que proporciona servidores, almacenamiento y redes, como AWS EC2. PaaS (Plataforma como Servicio) que ofrece un entorno para desarrollar y desplegar aplicaciones, como Google App Engine o Azure App Service. SaaS (Software como Servicio) que entrega aplicaciones listas para usar, como Office 365, Salesforce o Google Workspace.</li>
+
+    <li><i class="fa-solid fa-hand-holding-dollar"></i> <strong>Estrategias de adopción y TCO:</strong> Comparativa entre CapEx (inversión inicial en infraestructura propia) y OpEx (gasto operativo mensual en la nube). Análisis de costo total de propiedad (TCO) entre un data center tradicional y la nube. FinOps como disciplina para optimizar costos en la nube mediante etiquetado, presupuestos y reservas de capacidad.</li>
+  </ul>
+</div>
+            </div>
+            <div class="week-visual">
+              <div class="diagram-container">
+                <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="15" y="15" width="270" height="190" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+                  <text x="150" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">Modelos Cloud</text>
+                  <rect x="30" y="55" width="70" height="30" rx="6" fill="#3b82f6"/>
+                  <text x="65" y="74" text-anchor="middle" font-size="9" fill="white" font-weight="600">IaaS</text>
+                  <rect x="115" y="55" width="70" height="30" rx="6" fill="#6366f1"/>
+                  <text x="150" y="74" text-anchor="middle" font-size="9" fill="white" font-weight="600">PaaS</text>
+                  <rect x="200" y="55" width="70" height="30" rx="6" fill="#8b5cf6"/>
+                  <text x="235" y="74" text-anchor="middle" font-size="9" fill="white" font-weight="600">SaaS</text>
+                  <text x="150" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">Despliegue</text>
+                  <circle cx="90" cy="160" r="28" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+                  <text x="90" y="155" text-anchor="middle" font-size="8" font-weight="600" fill="#0369a1">Pública</text>
+                  <circle cx="210" cy="160" r="28" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.5"/>
+                  <text x="210" y="155" text-anchor="middle" font-size="8" font-weight="600" fill="#3730a3">Privada</text>
+                  <circle cx="150" cy="195" r="20" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+                  <text x="150" y="199" text-anchor="middle" font-size="8" font-weight="600" fill="#6b21a8">Híbrida</text>
+                </svg>
+              </div>
+              <div class="video-thumbnail-container" data-video-id="h4Af5bbFAq0" data-video-title="Computación en la Nube">
+                <div class="video-thumbnail"><img src="https://img.youtube.com/vi/h4Af5bbFAq0/maxresdefault.jpg" alt="Video Semana 2" onerror="this.src='https://img.youtube.com/vi/h4Af5bbFAq0/hqdefault.jpg'"><div class="play-overlay"><i class="fa-regular fa-circle-play"></i></div></div>
+                <p class="video-caption"><i class="fa-brands fa-youtube"></i> Click para ver el video</p>
+              </div>
+              <button class="btn-reading" data-title="Semana 2: Lectura Complementaria" data-content="<strong>Capítulo 6 - 'Cloud Computing' (Thomas Erl)</strong><br><br>Principios fundamentales de la computación en la nube. Proveedores líderes y estrategias de migración.">📖 Lectura complementaria</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEMANA 3 -->
+        <div class="week-card reveal" data-week="3">
+          <div class="week-header">
+            <div class="week-number">03</div>
+            <div class="week-info">
+              <span class="week-unit">UNIDAD I</span>
+              <h3>Administración en la Nube</h3>
+            </div>
+            <div class="week-actions">
+              <button class="btn-pdf" data-week="3" data-title="Semana 3 - Administración en la Nube">
+                <i class="fa-regular fa-file-pdf"></i> PDF
+              </button>
+              <div class="week-progress-badge"><span class="progress-check"><i class="fa-regular fa-square"></i></span><span class="progress-percent">0%</span></div>
+            </div>
+          </div>
+          <div class="week-body">
+            <div class="week-content">
+              <div class="learning-goal"><i class="fa-regular fa-flag-checkered"></i> <strong>Objetivo:</strong> Identificar las funciones clave de la administración cloud y herramientas DevOps.</div>
+              <div class="topics">
+  <h4><i class="fa-solid fa-list-check"></i> Temas desarrollados</h4>
+  <ul>
+    <li><i class="fa-solid fa-gears"></i> <strong>Ciclo de vida de la administración cloud:</strong> Aprovisionamiento para la creación y configuración de recursos en la nube. Monitoreo continuo de rendimiento y disponibilidad mediante herramientas especializadas. Escalado automático de recursos según la demanda para optimizar rendimiento y costos. Optimización continua para mejorar el rendimiento y reducir gastos. Desmantelamiento para la eliminación segura de recursos no utilizados.</li>
+
+    <li><i class="fa-solid fa-id-card"></i> <strong>Gestión de identidades y accesos (IAM):</strong> Principio de menor privilegio que asigna solo los permisos necesarios para cada usuario. Autenticación multifactor (MFA) para verificación en dos pasos que aumenta la seguridad. Roles y políticas que definen qué acciones puede realizar cada usuario o servicio. SSO (Single Sign-On) que permite un solo inicio de sesión para múltiples servicios en la nube.</li>
+
+    <li><i class="fa-regular fa-chart-line"></i> <strong>Monitoreo, alertas y control de costos (FinOps):</strong> Herramientas como CloudWatch, Prometheus y Grafana para supervisar métricas. Etiquetado de recursos (tagging) para asignar costos por departamento, proyecto o ambiente. Presupuestos con alertas automáticas cuando se superan los umbrales definidos. Reserved Instances que ofrecen descuentos por compromiso de uso a largo plazo.</li>
+
+    <li><i class="fa-solid fa-box"></i> <strong>Contenedores y orquestación:</strong> Docker para empaquetar aplicaciones con todas sus dependencias en contenedores portátiles. Kubernetes (K8s) para orquestar contenedores gestionando pods, servicios y deployments. Ventajas de los contenedores como portabilidad entre entornos, eficiencia en el uso de recursos y escalado rápido. Casos de uso comunes como microservicios, pipelines CI/CD y despliegues continuos.</li>
+  </ul>
+</div>
+            </div>
+            <div class="week-visual">
+              <div class="diagram-container">
+                <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; max-width:100%;">
+  <!-- Contorno que se ajusta al viewBox -->
+  <rect x="10" y="10" width="380" height="300" rx="15" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Título -->
+  <text x="200" y="45" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Ciclo de Administración Cloud</text>
+  
+  <!-- Círculo central (ahora centrado correctamente) -->
+  <circle cx="200" cy="185" r="90" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8 6"/>
+  
+  <!-- Aprovisionamiento - Parte superior -->
+  <g transform="translate(200,100)">
+    <circle r="32" fill="#3b82f6"/>
+    <text x="0" y="-6" text-anchor="middle" font-size="8" fill="white" font-weight="600">Aprovisio-</text>
+    <text x="0" y="5" text-anchor="middle" font-size="8" fill="white" font-weight="600">namiento</text>
+  </g>
+  
+  <!-- Monitoreo - Derecha superior -->
+  <g transform="translate(275,155)">
+    <circle r="32" fill="#6366f1"/>
+    <text x="0" y="-6" text-anchor="middle" font-size="8" fill="white" font-weight="600">Monitoreo</text>
+    <text x="0" y="5" text-anchor="middle" font-size="8" fill="white" font-weight="600">& Alertas</text>
+  </g>
+  
+  <!-- Optimización - Derecha inferior -->
+  <g transform="translate(260,245)">
+    <circle r="32" fill="#8b5cf6"/>
+    <text x="0" y="-6" text-anchor="middle" font-size="8" fill="white" font-weight="600">Optimización</text>
+    <text x="0" y="5" text-anchor="middle" font-size="8" fill="white" font-weight="600">Costos</text>
+  </g>
+  
+  <!-- Seguridad - Izquierda inferior -->
+  <g transform="translate(140,245)">
+    <circle r="32" fill="#a78bfa"/>
+    <text x="0" y="-6" text-anchor="middle" font-size="8" fill="white" font-weight="600">Seguridad</text>
+    <text x="0" y="5" text-anchor="middle" font-size="8" fill="white" font-weight="600">IAM</text>
+  </g>
+  
+  <!-- Escalabilidad - Izquierda superior -->
+  <g transform="translate(125,155)">
+    <circle r="32" fill="#60a5fa"/>
+    <text x="0" y="-6" text-anchor="middle" font-size="8" fill="white" font-weight="600">Escala-</text>
+    <text x="0" y="5" text-anchor="middle" font-size="8" fill="white" font-weight="600">bilidad</text>
+  </g>
+  
+  <!-- Líneas conectoras al centro -->
+  <line x1="200" y1="132" x2="200" y2="140" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="243" y1="170" x2="235" y2="178" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="243" y1="210" x2="235" y2="202" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="157" y1="210" x2="165" y2="202" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="157" y1="170" x2="165" y2="178" stroke="#94a3b8" stroke-width="1.5"/>
+</svg>
+              </div>
+              <div class="video-thumbnail-container" data-video-id="xT75e-G1eak" data-video-title="Administración en la Nube">
+                <div class="video-thumbnail"><img src="https://img.youtube.com/vi/xT75e-G1eak/maxresdefault.jpg" alt="Video Semana 3" onerror="this.src='https://img.youtube.com/vi/xT75e-G1eak/hqdefault.jpg'"><div class="play-overlay"><i class="fa-regular fa-circle-play"></i></div></div>
+                <p class="video-caption"><i class="fa-brands fa-youtube"></i> Click para ver el video</p>
+              </div>
+              <button class="btn-reading" data-title="Semana 3: Lectura Complementaria" data-content="<strong>DevOps y Herramientas Cloud</strong><br><br>Prácticas de CI/CD, infraestructura como código, monitoreo.">📖 Lectura complementaria</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEMANA 4 -->
+        <div class="week-card reveal" data-week="4">
+          <div class="week-header">
+            <div class="week-number">04</div>
+            <div class="week-info">
+              <span class="week-unit">UNIDAD I</span>
+              <h3>Infraestructura de TI</h3>
+            </div>
+            <div class="week-actions">
+              <button class="btn-pdf" data-week="4" data-title="Semana 4 - Infraestructura de TI">
+                <i class="fa-regular fa-file-pdf"></i> PDF
+              </button>
+              <div class="week-progress-badge"><span class="progress-check"><i class="fa-regular fa-square"></i></span><span class="progress-percent">0%</span></div>
+            </div>
+          </div>
+          <div class="week-body">
+            <div class="week-content">
+              <div class="learning-goal"><i class="fa-regular fa-flag-checkered"></i> <strong>Objetivo:</strong> Analizar los componentes de la infraestructura de TI y su evolución.</div>
+              <div class="topics">
+  <h4><i class="fa-solid fa-list-check"></i> Temas desarrollados</h4>
+  <ul>
+    <li><i class="fa-solid fa-server"></i> <strong>Componentes de la infraestructura TI:</strong> Servidores en formatos rack, blade o torre con CPU, RAM y almacenamiento. Sistemas de almacenamiento como DAS (conexión directa), NAS (almacenamiento en red) y SAN (red de área de almacenamiento). Redes con switches, routers, firewalls y access points. Centros de datos clasificados en Tier I a IV según su redundancia y disponibilidad. Alta disponibilidad con SLAs que garantizan porcentajes como 99.9% de tiempo activo.</li>
+
+    <li><i class="fa-solid fa-diagram-project"></i> <strong>Evolución de la infraestructura TI:</strong> Era mainframe (1960-1980) con grandes computadoras centralizadas. Arquitectura cliente-servidor (1990) con PCs conectadas a servidores. Virtualización (2000) que permite múltiples máquinas virtuales en un solo servidor físico con VMware o Hyper-V. Contenedores (2010) con Docker y Kubernetes para mayor eficiencia. Cloud nativo (2020+) con serverless, edge computing y arquitectura zero trust.</li>
+
+    <li><i class="fa-solid fa-cloud-arrow-up"></i> <strong>Virtualización y contenedores:</strong> Hipervisores tipo 1 como VMware ESXi y Microsoft Hyper-V que ejecutan directamente sobre el hardware. Hipervisores tipo 2 como VirtualBox y VMware Workstation que se ejecutan sobre un sistema operativo anfitrión. Diferencias entre máquinas virtuales (incluyen SO completo) y contenedores (comparten el kernel del SO anfitrión). Orquestación con Kubernetes, OpenShift o Docker Swarm para gestionar contenedores a escala.</li>
+
+    <li><i class="fa-solid fa-chart-line"></i> <strong>Gestión de la infraestructura:</strong> ITIL como marco de mejores prácticas para la gestión de servicios TI incluyendo Service Desk, gestión de incidentes, cambios y problemas. Monitoreo con herramientas como Nagios, Zabbix o PRTG. Automatización con Ansible, Puppet o Chef para configuraciones repetibles. BCP (Plan de Continuidad de Negocio) para mantener operaciones ante desastres. DRP (Plan de Recuperación ante Desastres) para restaurar sistemas después de una falla.</li>
+  </ul>
+</div>
+            </div>
+            <div class="week-visual">
+              <div class="diagram-container">
+                <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; max-width:100%;">
+  <!-- Contorno -->
+  <rect x="10" y="10" width="400" height="300" rx="15" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Título centrado -->
+  <text x="210" y="45" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Capas de Infraestructura TI</text>
+  
+  <!-- Capa 1: Aplicaciones Empresariales -->
+  <rect x="55" y="65" width="310" height="35" rx="8" fill="#1e3a5f"/>
+  <text x="210" y="87" text-anchor="middle" font-size="11" fill="white" font-weight="600">Aplicaciones Empresariales</text>
+  
+  <!-- Capa 2: Middleware -->
+  <rect x="60" y="108" width="300" height="30" rx="8" fill="#2563eb"/>
+  <text x="210" y="128" text-anchor="middle" font-size="10" fill="white">Middleware · Sistemas Operativos</text>
+  
+  <!-- Capa 3: Virtualización -->
+  <rect x="65" y="146" width="290" height="30" rx="8" fill="#4f46e5"/>
+  <text x="210" y="166" text-anchor="middle" font-size="10" fill="white">Virtualización · Contenedores</text>
+  
+  <!-- Capa 4: Redes -->
+  <rect x="70" y="184" width="280" height="30" rx="8" fill="#7c3aed"/>
+  <text x="210" y="204" text-anchor="middle" font-size="10" fill="white">Redes · Telecomunicaciones</text>
+  
+  <!-- Capa 5: Hardware -->
+  <rect x="75" y="222" width="270" height="30" rx="8" fill="#9d4edd"/>
+  <text x="210" y="242" text-anchor="middle" font-size="10" fill="white">Hardware Físico · Servidores</text>
+  
+  <!-- Flecha o indicador ALTA (parte superior) -->
+  <text x="35" y="200" font-size="11" font-weight="700" fill="#64748b" transform="rotate(-90,35,200)" text-anchor="middle">▲ ALTA</text>
+  
+  <!-- Flecha o indicador BASE (parte inferior) -->
+  <text x="35" y="255" font-size="11" font-weight="700" fill="#64748b" transform="rotate(-90,35,255)" text-anchor="middle">▼ BASE</text>
+  
+  <!-- Línea vertical para conectar los niveles -->
+  <line x1="42" y1="80" x2="42" y2="240" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4"/>
+</svg>
+              </div>
+              <div class="video-thumbnail-container" data-video-id="NNsUwZXzE-Q" data-video-title="Infraestructura de TI">
+                <div class="video-thumbnail"><img src="https://img.youtube.com/vi/NNsUwZXzE-Q/maxresdefault.jpg" alt="Video Semana 4" onerror="this.src='https://img.youtube.com/vi/NNsUwZXzE-Q/hqdefault.jpg'"><div class="play-overlay"><i class="fa-regular fa-circle-play"></i></div></div>
+                <p class="video-caption"><i class="fa-brands fa-youtube"></i> Click para ver el video</p>
+              </div>
+              <button class="btn-reading" data-title="Semana 4: Lectura Complementaria" data-content="<strong>Infraestructura de TI y Tecnologías Emergentes</strong><br><br>Virtualización, green computing, plataformas móviles.">📖 Lectura complementaria</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEMANA 5 -->
+        <div class="week-card reveal" data-week="5">
+          <div class="week-header">
+            <div class="week-number">05</div>
+            <div class="week-info">
+              <span class="week-unit">UNIDAD II</span>
+              <h3>Sistemas de Información en los Negocios</h3>
+            </div>
+            <div class="week-actions">
+              <button class="btn-pdf" data-week="5" data-title="Semana 5 - Sistemas de Información en los Negocios">
+                <i class="fa-regular fa-file-pdf"></i> PDF
+              </button>
+              <div class="week-progress-badge"><span class="progress-check"><i class="fa-regular fa-square"></i></span><span class="progress-percent">0%</span></div>
+            </div>
+          </div>
+          <div class="week-body">
+            <div class="week-content">
+              <div class="learning-goal"><i class="fa-regular fa-flag-checkered"></i> <strong>Objetivo:</strong> Evaluar el impacto de los SI en los procesos de negocio.</div>
+              <div class="topics">
+  <h4><i class="fa-solid fa-list-check"></i> Temas desarrollados</h4>
+  <ul>
+    <li><i class="fa-solid fa-briefcase"></i> <strong>Sistemas de Información en áreas funcionales:</strong> Ventas y marketing con automatización, CRM y análisis de clientes. Finanzas con gestión de tesorería, reporting financiero y presupuestos. Recursos humanos con nómina, reclutamiento y evaluación de desempeño. Producción con MRP (planificación de materiales), MES (ejecución de producción) y PLC (control de planta). Integración mediante sistemas ERP que unifican todas las áreas de la empresa.</li>
+
+    <li><i class="fa-solid fa-brain"></i> <strong>Inteligencia de Negocios (BI) y Data Warehouse:</strong> Proceso ETL (Extract, Transform, Load) para integrar datos desde múltiples fuentes. Data Warehouse como almacén centralizado de datos históricos para análisis. Modelado dimensional con esquemas estrella y copo de nieve. Diferencias entre OLAP (procesamiento analítico) y OLTP (procesamiento transaccional). Herramientas de BI como Power BI, Tableau, Looker y QlikView para visualización de datos.</li>
+
+    <li><i class="fa-solid fa-chart-pie"></i> <strong>Aplicaciones empresariales integradas:</strong> CRM (Customer Relationship Management) como Salesforce, HubSpot o Zoho para gestionar la relación con clientes. SCM (Supply Chain Management) como Blue Yonder, SAP SCM u Oracle SCM para optimizar la cadena de suministro. ERP (Enterprise Resource Planning) como SAP, Oracle o Microsoft Dynamics para integrar todos los recursos de la empresa. Beneficios de la integración como eliminación de silos de información, visión 360° del cliente y mejora de la eficiencia operativa.</li>
+
+    <li><i class="fa-solid fa-chart-line"></i> <strong>Minería de datos y cuadros de mando:</strong> Clasificación con algoritmos que predicen categorías como detección de spam o fraude. Clustering para agrupar datos similares como segmentación de clientes por comportamiento. Reglas de asociación como "quien compró X también compró Y" aplicado a la canasta de mercado. Dashboards interactivos con visualizaciones para la alta dirección mostrando KPIs clave. Caso Netflix donde su sistema de recomendación genera aproximadamente el 80% del contenido visto por los usuarios.</li>
+  </ul>
+</div>
+            </div>
+            <div class="week-visual">
+              <div class="diagram-container">
+                <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; max-width:100%;">
+  <!-- Contorno -->
+  <rect x="10" y="10" width="400" height="320" rx="15" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Título centrado -->
+  <text x="210" y="45" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Ecosistema de Inteligencia de Negocios</text>
+  
+  <!-- Nodo Central: BI (Inteligencia de Negocios) -->
+  <circle cx="210" cy="180" r="48" fill="#1e3a5f"/>
+  <text x="210" y="173" text-anchor="middle" font-size="14" fill="white" font-weight="700">BI</text>
+  <text x="210" y="190" text-anchor="middle" font-size="8" fill="#93c5fd">Inteligencia</text>
+  <text x="210" y="200" text-anchor="middle" font-size="8" fill="#93c5fd">de Negocios</text>
+  
+  <!-- Nodo Superior Izquierdo: CRM -->
+  <circle cx="95" cy="100" r="38" fill="#3b82f6"/>
+  <text x="95" y="96" text-anchor="middle" font-size="12" fill="white" font-weight="700">CRM</text>
+  <text x="95" y="109" text-anchor="middle" font-size="8" fill="#bfdbfe">Clientes</text>
+  
+  <!-- Nodo Superior Derecho: ERP -->
+  <circle cx="325" cy="100" r="38" fill="#6366f1"/>
+  <text x="325" y="96" text-anchor="middle" font-size="12" fill="white" font-weight="700">ERP</text>
+  <text x="325" y="109" text-anchor="middle" font-size="8" fill="#c7d2fe">Recursos</text>
+  
+  <!-- Nodo Inferior Izquierdo: SCM -->
+  <circle cx="95" cy="270" r="38" fill="#8b5cf6"/>
+  <text x="95" y="266" text-anchor="middle" font-size="12" fill="white" font-weight="700">SCM</text>
+  <text x="95" y="279" text-anchor="middle" font-size="8" fill="#ddd6fe">Cadena</text>
+  
+  <!-- Nodo Inferior Derecho: DSS -->
+  <circle cx="325" cy="270" r="38" fill="#a78bfa"/>
+  <text x="325" y="266" text-anchor="middle" font-size="12" fill="white" font-weight="700">DSS</text>
+  <text x="325" y="279" text-anchor="middle" font-size="8" fill="#ede9fe">Decisiones</text>
+  
+  <!-- Líneas conectoras desde CRM al centro -->
+  <line x1="133" y1="120" x2="175" y2="152" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Líneas conectoras desde ERP al centro -->
+  <line x1="287" y1="120" x2="245" y2="152" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Líneas conectoras desde SCM al centro -->
+  <line x1="133" y1="250" x2="175" y2="215" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Líneas conectoras desde DSS al centro -->
+  <line x1="287" y1="250" x2="245" y2="215" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,3"/>
+</svg>
+              </div>
+              <div class="video-thumbnail-container" data-video-id="3LusU5Y2Zg4" data-video-title="Sistemas de Información en los Negocios">
+                <div class="video-thumbnail"><img src="https://img.youtube.com/vi/3LusU5Y2Zg4/hqdefault.jpg" alt="Video Semana 5"><div class="play-overlay"><i class="fa-regular fa-circle-play"></i></div></div>
+                <p class="video-caption"><i class="fa-brands fa-youtube"></i> Click para ver el video</p>
+              </div>
+              <button class="btn-reading" data-title="Semana 5: Lectura Complementaria" data-content="<strong>Sistemas de Información y Ventaja Competitiva</strong><br><br>Modelo de Porter, cadena de valor, casos Uber y Airbnb.">📖 Lectura complementaria</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CALENDARIO INTERACTIVO ==================== -->
+    <section id="calendario" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag"><i class="fa-regular fa-calendar"></i> Fechas importantes</span>
+          <h2>Calendario Académico</h2>
+          <p>Mantente al día con las entregas y evaluaciones del curso</p>
+        </div>
+        <div class="calendar-container reveal">
+          <div class="calendar-header">
+            <button id="prevMonth" class="calendar-nav"><i class="fa-solid fa-chevron-left"></i></button>
+            <h3 id="monthYear"></h3>
+            <button id="nextMonth" class="calendar-nav"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="calendar-weekdays">
+            <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+          </div>
+          <div class="calendar-days" id="calendarDays"></div>
+          <div class="calendar-events-list">
+            <h4><i class="fa-regular fa-list"></i> Próximos eventos</h4>
+            <div id="upcomingEvents"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EQUIPO DOCENTE ==================== -->
+    <section id="docente" class="section section-alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag"><i class="fa-solid fa-chalkboard-user"></i> Conferencista</span>
+          <h2>Equipo Docente</h2>
+        </div>
+        <div class="teacher-card reveal">
+          <div class="teacher-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+          <div class="teacher-info">
+            <h3>Dr. Magno Teofilo Baldeon Tovar</h3>
+            <p>Doctor en Ingeniería de Sistemas · Magíster en Gestión de TI · Especialista en Gobierno de Datos y Cloud Strategy</p>
+            <p><strong>Experiencia:</strong> +15 años en transformación digital. Consultor senior IBM y Accenture. Director del Laboratorio de Innovación Tecnológica UPLA.</p>
+            <div class="teacher-contact">
+              <a href="#"><i class="fa-regular fa-envelope"></i> magno.baldeon@upla.edu.pe</a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROGRESO DINÁMICO ==================== -->
+    <section id="progreso" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag"><i class="fa-solid fa-chart-line"></i> Seguimiento</span>
+          <h2>Mi Progreso</h2>
+          <p>Marca las semanas completadas para ver tu avance general</p>
+        </div>
+        <div class="progress-container reveal">
+          <div class="overall-progress">
+            <div class="progress-label"><span>Avance total del curso</span><span id="overallPercent">0%</span></div>
+            <div class="progress-bar-bg"><div class="progress-fill" id="overallFill" style="width: 0%;"></div></div>
+          </div>
+          <div class="weeks-progress-list" id="weeksProgressList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <i class="fa-solid fa-database"></i>
+          <div><strong>Gerencia de Sistemas de Información</strong><span>Código 332159 · Ciclo VII · 2026-I</span></div>
+        </div>
+        <div class="footer-links">
+          <div><h5>Enlaces</h5><a href="#inicio">Inicio</a><a href="#semanas">Semanas</a><a href="#calendario">Calendario</a><a href="#progreso">Progreso</a></div>
+          <div><h5>Bibliografía</h5><a href="#">Laudon & Laudon (2020)</a><a href="#">Thomas Erl (2013)</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span><i class="fa-regular fa-copyright"></i> 2026 Universidad Peruana Los Andes - Ingeniería de Sistemas</span>
+        <div class="social"><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-x-twitter"></i><i class="fa-brands fa-linkedin"></i></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
